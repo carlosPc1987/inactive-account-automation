@@ -46,11 +46,12 @@ class AccountControllerTest {
 
     @Test
     void shouldReturnBadRequestWhenCreateInputInvalid() {
+        CreateAccountRequest request = new CreateAccountRequest("");
         when(accountService.createAccount("")).thenThrow(new IllegalArgumentException("email is required"));
 
         ResponseStatusException ex = assertThrows(
                 ResponseStatusException.class,
-                () -> accountController.createAccount(new CreateAccountRequest(""))
+                () -> accountController.createAccount(request)
         );
 
         assertEquals(400, ex.getStatusCode().value());
