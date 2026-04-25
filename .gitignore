@@ -1,1 +1,29 @@
+# IntelliJ / IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Keep explicit local workspace ignore (already applied)
 .idea/workspace.xml
+
+# Maven / Java build outputs
+target/
+*/target/
+out/
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment / local configs
+.env
+.env.*
