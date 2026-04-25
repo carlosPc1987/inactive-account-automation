@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    # Use environment variables in local/CI environments.
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/account_lifecycle}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:change-me}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+security:
+  jwt:
+    # Do not hardcode real secret values in Git.
+    secret: ${JWT_SECRET:change-me}
+    expiration-minutes: ${JWT_EXPIRATION_MINUTES:60}
