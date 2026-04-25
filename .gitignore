@@ -27,3 +27,24 @@ Thumbs.db
 # Environment / local configs
 .env
 .env.*
+
+# Local secrets / credentials
+*.key
+*.pem
+*.p12
+*.jks
+secrets/
+credentials/
+
+# Spring local profiles
+application-local.yml
+application-local.yaml
+application-local.properties
+
+# Database dumps / backups
+*.sql
+*.dump
+*.bak
+*.backup
+*.sqlite
+*.db
