@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class AccountTest {
 
     @Test
-    void shouldMarkAccountAsInactive() {
+    void givenActiveAccount_whenMarkAsInactive_thenSetInactiveTrue() {
         Account account = new Account(
                 UUID.randomUUID(),
                 "user@example.com",
@@ -28,7 +28,7 @@ class AccountTest {
     }
 
     @Test
-    void shouldRegisterActivityAndMarkAccountAsActive() {
+    void givenInactiveAccount_whenRegisterActivity_thenUpdateLastActivityAndSetInactiveFalse() {
         Account account = new Account(
                 UUID.randomUUID(),
                 "user@example.com",
@@ -45,7 +45,7 @@ class AccountTest {
     }
 
     @Test
-    void shouldFailWhenRegisteringNullActivity() {
+    void givenNullActivityTime_whenRegisterActivity_thenThrowNullPointerException() {
         Account account = new Account(
                 UUID.randomUUID(),
                 "user@example.com",
@@ -58,7 +58,7 @@ class AccountTest {
     }
 
     @Test
-    void shouldFailWhenIdIsNull() {
+    void givenNullId_whenCreateAccount_thenThrowNullPointerException() {
         assertThrows(
                 NullPointerException.class,
                 () -> new Account(
@@ -72,7 +72,7 @@ class AccountTest {
     }
 
     @Test
-    void shouldFailWhenEmailIsNull() {
+    void givenNullEmail_whenCreateAccount_thenThrowNullPointerException() {
         assertThrows(
                 NullPointerException.class,
                 () -> new Account(
@@ -86,7 +86,7 @@ class AccountTest {
     }
 
     @Test
-    void shouldFailWhenCreatedAtIsNull() {
+    void givenNullCreatedAt_whenCreateAccount_thenThrowNullPointerException() {
         assertThrows(
                 NullPointerException.class,
                 () -> new Account(
@@ -100,7 +100,7 @@ class AccountTest {
     }
 
     @Test
-    void shouldFailWhenLastActivityAtIsNull() {
+    void givenNullLastActivityAt_whenCreateAccount_thenThrowNullPointerException() {
         assertThrows(
                 NullPointerException.class,
                 () -> new Account(
