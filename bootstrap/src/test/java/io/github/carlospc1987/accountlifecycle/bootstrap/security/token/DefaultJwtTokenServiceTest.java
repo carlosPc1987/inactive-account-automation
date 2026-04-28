@@ -17,7 +17,7 @@ class DefaultJwtTokenServiceTest {
     private static final String SECRET_32_BYTES = "12345678901234567890123456789012";
 
     @Test
-    void shouldGenerateAndValidateToken() {
+    void givenValidConfiguration_whenGenerateAndValidateToken_thenReturnExpectedClaims() {
         JwtProperties properties = jwtProperties(60, "account-lifecycle-manager");
         DefaultJwtTokenService tokenService = new DefaultJwtTokenService(properties);
         UUID accountId = UUID.randomUUID();
@@ -31,7 +31,7 @@ class DefaultJwtTokenServiceTest {
     }
 
     @Test
-    void shouldFailValidationWhenIssuerDoesNotMatch() {
+    void givenTokenWithDifferentIssuer_whenValidateToken_thenThrowIllegalArgumentException() {
         JwtProperties sourceProperties = jwtProperties(60, "account-lifecycle-manager");
         DefaultJwtTokenService sourceService = new DefaultJwtTokenService(sourceProperties);
         String token = sourceService.generateAccessToken(UUID.randomUUID(), List.of("USER"));
@@ -43,7 +43,7 @@ class DefaultJwtTokenServiceTest {
     }
 
     @Test
-    void shouldFailValidationWhenTokenIsExpired() {
+    void givenExpiredToken_whenValidateToken_thenThrowIllegalArgumentException() {
         JwtProperties properties = jwtProperties(-1, "account-lifecycle-manager");
         Clock fixedClock = Clock.fixed(Instant.parse("2026-01-01T00:00:00Z"), ZoneOffset.UTC);
         DefaultJwtTokenService tokenService = new DefaultJwtTokenService(properties, fixedClock);
@@ -54,7 +54,7 @@ class DefaultJwtTokenServiceTest {
     }
 
     @Test
-    void shouldFailWhenSecretIsMissing() {
+    void givenMissingSecret_whenGenerateToken_thenThrowIllegalStateException() {
         JwtProperties properties = jwtProperties(60, "account-lifecycle-manager");
         properties.setSecret("");
         DefaultJwtTokenService tokenService = new DefaultJwtTokenService(properties);

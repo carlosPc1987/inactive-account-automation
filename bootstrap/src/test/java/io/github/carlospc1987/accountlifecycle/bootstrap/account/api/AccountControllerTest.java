@@ -34,7 +34,7 @@ class AccountControllerTest {
     }
 
     @Test
-    void shouldCreateAccount() {
+    void givenValidCreateRequest_whenCreateAccount_thenReturnCreatedAccount() {
         Account created = account(UUID.randomUUID(), "user@example.com", false);
         when(accountService.createAccount("user@example.com")).thenReturn(created);
 
@@ -45,7 +45,7 @@ class AccountControllerTest {
     }
 
     @Test
-    void shouldReturnBadRequestWhenCreateInputInvalid() {
+    void givenInvalidCreateRequest_whenCreateAccount_thenReturnBadRequest() {
         CreateAccountRequest request = new CreateAccountRequest("");
         when(accountService.createAccount("")).thenThrow(new IllegalArgumentException("email is required"));
 
@@ -58,7 +58,7 @@ class AccountControllerTest {
     }
 
     @Test
-    void shouldGetAccountById() {
+    void givenExistingAccountId_whenGetAccountById_thenReturnAccount() {
         UUID id = UUID.randomUUID();
         Account account = account(id, "user@example.com", false);
         when(accountService.getAccountById(id)).thenReturn(account);
@@ -69,7 +69,7 @@ class AccountControllerTest {
     }
 
     @Test
-    void shouldReturnNotFoundWhenAccountDoesNotExist() {
+    void givenMissingAccountId_whenGetAccountById_thenReturnNotFound() {
         UUID id = UUID.randomUUID();
         when(accountService.getAccountById(id)).thenThrow(new NoSuchElementException("Account not found"));
 
@@ -79,7 +79,7 @@ class AccountControllerTest {
     }
 
     @Test
-    void shouldReturnAllAccounts() {
+    void givenExistingAccounts_whenGetAllAccounts_thenReturnAccountList() {
         when(accountService.getAllAccounts()).thenReturn(List.of(
                 account(UUID.randomUUID(), "a@example.com", false),
                 account(UUID.randomUUID(), "b@example.com", true)
@@ -91,7 +91,7 @@ class AccountControllerTest {
     }
 
     @Test
-    void shouldUpdateAccountEmail() {
+    void givenValidUpdateRequest_whenUpdateAccountEmail_thenReturnUpdatedAccount() {
         UUID id = UUID.randomUUID();
         Account updated = account(id, "new@example.com", false);
         when(accountService.updateAccountEmail(id, "new@example.com")).thenReturn(updated);
@@ -102,7 +102,7 @@ class AccountControllerTest {
     }
 
     @Test
-    void shouldDeleteAccount() {
+    void givenExistingAccountId_whenDeleteAccount_thenInvokeServiceDelete() {
         UUID id = UUID.randomUUID();
 
         accountController.deleteAccount(id);
@@ -111,7 +111,7 @@ class AccountControllerTest {
     }
 
     @Test
-    void shouldReturnNotFoundWhenDeleteTargetMissing() {
+    void givenMissingAccountId_whenDeleteAccount_thenReturnNotFound() {
         UUID id = UUID.randomUUID();
         doThrow(new NoSuchElementException("Account not found")).when(accountService).deleteAccount(id);
 

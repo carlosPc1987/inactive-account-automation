@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class SchedulerConfigurationTest {
 
     @Test
-    void shouldCreateInactivityEvaluationSchedulerBean() {
+    void givenInactivityEvaluationService_whenCreateSchedulerBean_thenReturnSchedulerInstance() {
         SchedulerConfiguration configuration = new SchedulerConfiguration();
         InactivityEvaluationService evaluationService = Mockito.mock(InactivityEvaluationService.class);
 
