@@ -49,6 +49,19 @@ class JwtAuthenticationFilterTest {
     }
 
     @Test
+    void shouldSkipAuthenticationWhenHeaderIsNotBearer() throws Exception {
+        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtTokenService);
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        MockHttpServletResponse response = new MockHttpServletResponse();
+        request.addHeader("Authorization", "Basic abc123");
+
+        filter.doFilter(request, response, filterChain);
+
+        verify(filterChain).doFilter(request, response);
+        assertNull(SecurityContextHolder.getContext().getAuthentication());
+    }
+
+    @Test
     void shouldAuthenticateWhenBearerTokenIsValid() throws Exception {
         JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtTokenService);
         MockHttpServletRequest request = new MockHttpServletRequest();
