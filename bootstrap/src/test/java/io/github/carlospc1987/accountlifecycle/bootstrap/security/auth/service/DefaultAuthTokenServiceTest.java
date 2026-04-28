@@ -52,4 +52,33 @@ class DefaultAuthTokenServiceTest {
 
         assertThrows(IllegalArgumentException.class, () -> service.issueAccessToken(" "));
     }
+
+    @Test
+    void shouldFailWhenEmailIsNull() {
+        JwtTokenService jwtTokenService = mock(JwtTokenService.class);
+        JwtProperties jwtProperties = new JwtProperties();
+        DefaultAuthTokenService service = new DefaultAuthTokenService(jwtTokenService, jwtProperties);
+
+        assertThrows(IllegalArgumentException.class, () -> service.issueAccessToken(null));
+    }
+
+    @Test
+    void shouldNormalizeEmailBeforeGeneratingToken() {
+        JwtTokenService jwtTokenService = mock(JwtTokenService.class);
+        JwtProperties jwtProperties = new JwtProperties();
+        when(jwtTokenService.generateAccessToken(org.mockito.ArgumentMatchers.any(UUID.class), org.mockito.ArgumentMatchers.anyList()))
+                .thenReturn("generated-jwt");
+        DefaultAuthTokenService service = new DefaultAuthTokenService(jwtTokenService, jwtProperties);
+
+        service.issueAccessToken("  USER@Example.com  ");
+
+        ArgumentCaptor<UUID> idCaptor = ArgumentCaptor.forClass(UUID.class);
+        @SuppressWarnings("unchecked")
+        ArgumentCaptor<List<String>> rolesCaptor = ArgumentCaptor.forClass(List.class);
+        verify(jwtTokenService).generateAccessToken(idCaptor.capture(), rolesCaptor.capture());
+
+        UUID expectedId = UUID.nameUUIDFromBytes("user@example.com".getBytes(StandardCharsets.UTF_8));
+        assertEquals(expectedId, idCaptor.getValue());
+        assertEquals(List.of("ROLE_USER"), rolesCaptor.getValue());
+    }
 }
