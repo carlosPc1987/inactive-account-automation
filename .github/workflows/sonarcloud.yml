@@ -31,6 +31,6 @@ jobs:
         run: >
           mvn -B clean verify
           org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar
-          -Dsonar.projectKey=carlospc1987_inactive-account-automation
+          -Dsonar.projectKey=carlosPc1987_inactive-account-automation
           -Dsonar.organization=carlospc1987
           -Dsonar.host.url=https://sonarcloud.io
