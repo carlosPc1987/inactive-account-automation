@@ -17,6 +17,7 @@ security:
     # Never commit real secrets. Provide through environment variables.
     secret: ${JWT_SECRET:}
     expiration-minutes: ${JWT_EXPIRATION_MINUTES:60}
+    issuer: ${JWT_ISSUER:account-lifecycle-manager}
     algorithm: ${JWT_ALGORITHM:HS256}
     required-claims:
       - sub
