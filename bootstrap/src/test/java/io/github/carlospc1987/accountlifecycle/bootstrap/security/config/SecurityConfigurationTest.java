@@ -11,7 +11,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -37,7 +36,7 @@ class SecurityConfigurationTest {
         when(http.csrf(any())).thenReturn(http);
         when(http.sessionManagement(any())).thenReturn(http);
         when(http.authorizeHttpRequests(any())).thenReturn(http);
-        when(http.addFilterBefore(eq(filter), eq(UsernamePasswordAuthenticationFilter.class))).thenReturn(http);
+        when(http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)).thenReturn(http);
         when(http.build()).thenReturn(builtChain);
 
         SecurityFilterChain chain = configuration.securityFilterChain(http, filter);
