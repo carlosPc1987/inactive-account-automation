@@ -29,97 +29,132 @@ class AccountAuditEventTest {
 
     @Test
     void givenNullId_whenCreateAccountAuditEvent_thenThrowNullPointerException() {
+        UUID accountId = UUID.randomUUID();
+        String eventType = "ACCOUNT_MARKED_INACTIVE";
+        String description = "description";
+        Instant occurredAt = Instant.now();
+
         assertThrows(
                 NullPointerException.class,
                 () -> new AccountAuditEvent(
                         null,
-                        UUID.randomUUID(),
-                        "ACCOUNT_MARKED_INACTIVE",
-                        "description",
-                        Instant.now()
+                        accountId,
+                        eventType,
+                        description,
+                        occurredAt
                 )
         );
     }
 
     @Test
     void givenNullAccountId_whenCreateAccountAuditEvent_thenThrowNullPointerException() {
+        UUID id = UUID.randomUUID();
+        String eventType = "ACCOUNT_MARKED_INACTIVE";
+        String description = "description";
+        Instant occurredAt = Instant.now();
+
         assertThrows(
                 NullPointerException.class,
                 () -> new AccountAuditEvent(
-                        UUID.randomUUID(),
+                        id,
                         null,
-                        "ACCOUNT_MARKED_INACTIVE",
-                        "description",
-                        Instant.now()
+                        eventType,
+                        description,
+                        occurredAt
                 )
         );
     }
 
     @Test
     void givenNullEventType_whenCreateAccountAuditEvent_thenThrowIllegalArgumentException() {
+        UUID id = UUID.randomUUID();
+        UUID accountId = UUID.randomUUID();
+        String description = "description";
+        Instant occurredAt = Instant.now();
+
         assertThrows(
                 IllegalArgumentException.class,
                 () -> new AccountAuditEvent(
-                        UUID.randomUUID(),
-                        UUID.randomUUID(),
+                        id,
+                        accountId,
                         null,
-                        "description",
-                        Instant.now()
+                        description,
+                        occurredAt
                 )
         );
     }
 
     @Test
     void givenBlankEventType_whenCreateAccountAuditEvent_thenThrowIllegalArgumentException() {
+        UUID id = UUID.randomUUID();
+        UUID accountId = UUID.randomUUID();
+        String description = "description";
+        Instant occurredAt = Instant.now();
+
         assertThrows(
                 IllegalArgumentException.class,
                 () -> new AccountAuditEvent(
-                        UUID.randomUUID(),
-                        UUID.randomUUID(),
+                        id,
+                        accountId,
                         "   ",
-                        "description",
-                        Instant.now()
+                        description,
+                        occurredAt
                 )
         );
     }
 
     @Test
     void givenNullDescription_whenCreateAccountAuditEvent_thenThrowIllegalArgumentException() {
+        UUID id = UUID.randomUUID();
+        UUID accountId = UUID.randomUUID();
+        String eventType = "ACCOUNT_MARKED_INACTIVE";
+        Instant occurredAt = Instant.now();
+
         assertThrows(
                 IllegalArgumentException.class,
                 () -> new AccountAuditEvent(
-                        UUID.randomUUID(),
-                        UUID.randomUUID(),
-                        "ACCOUNT_MARKED_INACTIVE",
+                        id,
+                        accountId,
+                        eventType,
                         null,
-                        Instant.now()
+                        occurredAt
                 )
         );
     }
 
     @Test
     void givenBlankDescription_whenCreateAccountAuditEvent_thenThrowIllegalArgumentException() {
+        UUID id = UUID.randomUUID();
+        UUID accountId = UUID.randomUUID();
+        String eventType = "ACCOUNT_MARKED_INACTIVE";
+        Instant occurredAt = Instant.now();
+
         assertThrows(
                 IllegalArgumentException.class,
                 () -> new AccountAuditEvent(
-                        UUID.randomUUID(),
-                        UUID.randomUUID(),
-                        "ACCOUNT_MARKED_INACTIVE",
+                        id,
+                        accountId,
+                        eventType,
                         " ",
-                        Instant.now()
+                        occurredAt
                 )
         );
     }
 
     @Test
     void givenNullOccurredAt_whenCreateAccountAuditEvent_thenThrowNullPointerException() {
+        UUID id = UUID.randomUUID();
+        UUID accountId = UUID.randomUUID();
+        String eventType = "ACCOUNT_MARKED_INACTIVE";
+        String description = "description";
+
         assertThrows(
                 NullPointerException.class,
                 () -> new AccountAuditEvent(
-                        UUID.randomUUID(),
-                        UUID.randomUUID(),
-                        "ACCOUNT_MARKED_INACTIVE",
-                        "description",
+                        id,
+                        accountId,
+                        eventType,
+                        description,
                         null
                 )
         );
