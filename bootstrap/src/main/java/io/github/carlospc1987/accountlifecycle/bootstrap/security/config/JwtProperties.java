@@ -9,6 +9,7 @@ public class JwtProperties {
 
     private String secret = "";
     private long expirationMinutes = 60;
+    private String issuer = "account-lifecycle-manager";
     private String algorithm = "HS256";
     private List<String> requiredClaims = List.of("sub", "roles", "iat", "exp");
 
@@ -34,6 +35,14 @@ public class JwtProperties {
 
     public void setAlgorithm(String algorithm) {
         this.algorithm = algorithm;
+    }
+
+    public String getIssuer() {
+        return issuer;
+    }
+
+    public void setIssuer(String issuer) {
+        this.issuer = issuer;
     }
 
     public List<String> getRequiredClaims() {
