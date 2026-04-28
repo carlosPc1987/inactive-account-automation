@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 class InactivityEvaluationSchedulerTest {
 
     @Test
-    void shouldTriggerEvaluationWithCurrentTime() {
+    void givenFixedClock_whenRunDailyEvaluation_thenEvaluateWithCurrentTime() {
         InactivityEvaluationService evaluationService = mock(InactivityEvaluationService.class);
         Instant now = Instant.parse("2026-04-28T00:00:00Z");
         Clock fixedClock = Clock.fixed(now, ZoneOffset.UTC);
@@ -33,7 +33,7 @@ class InactivityEvaluationSchedulerTest {
     }
 
     @Test
-    void shouldUseDefaultClockInPublicConstructor() {
+    void givenPublicConstructor_whenRunDailyEvaluation_thenUseDefaultClock() {
         InactivityEvaluationService evaluationService = mock(InactivityEvaluationService.class);
         InactivityEvaluationScheduler scheduler = new InactivityEvaluationScheduler(evaluationService);
 
@@ -45,14 +45,14 @@ class InactivityEvaluationSchedulerTest {
     }
 
     @Test
-    void shouldFailWhenServiceIsNull() {
+    void givenNullEvaluationService_whenCreateScheduler_thenThrowNullPointerException() {
         Clock fixedClock = Clock.fixed(Instant.parse("2026-04-28T00:00:00Z"), ZoneOffset.UTC);
 
         assertThrows(NullPointerException.class, () -> new InactivityEvaluationScheduler(null, fixedClock));
     }
 
     @Test
-    void shouldFailWhenClockIsNull() {
+    void givenNullClock_whenCreateScheduler_thenThrowNullPointerException() {
         InactivityEvaluationService evaluationService = mock(InactivityEvaluationService.class);
 
         assertThrows(NullPointerException.class, () -> new InactivityEvaluationScheduler(evaluationService, null));

@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 class SecurityConfigurationTest {
 
     @Test
-    void shouldCreateJwtAuthenticationFilterBean() {
+    void givenJwtTokenService_whenCreateJwtAuthenticationFilterBean_thenReturnFilterInstance() {
         SecurityConfiguration configuration = new SecurityConfiguration();
         JwtTokenService jwtTokenService = Mockito.mock(JwtTokenService.class);
 
@@ -27,7 +27,7 @@ class SecurityConfigurationTest {
     }
 
     @Test
-    void shouldBuildSecurityFilterChain() throws Exception {
+    void givenHttpSecurityAndJwtFilter_whenBuildSecurityFilterChain_thenReturnBuiltChain() throws Exception {
         SecurityConfiguration configuration = new SecurityConfiguration();
         HttpSecurity http = Mockito.mock(HttpSecurity.class);
         JwtAuthenticationFilter filter = Mockito.mock(JwtAuthenticationFilter.class);

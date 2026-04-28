@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
 class AuthTokenControllerTest {
 
     @Test
-    void shouldIssueToken() {
+    void givenValidEmail_whenIssueToken_thenReturnTokenResponse() {
         AuthTokenService authTokenService = Mockito.mock(AuthTokenService.class);
         AuthTokenController controller = new AuthTokenController(authTokenService);
         AuthTokenResponse expected = new AuthTokenResponse("token-value", "Bearer", 3600);
@@ -24,7 +24,7 @@ class AuthTokenControllerTest {
     }
 
     @Test
-    void shouldReturnBadRequestWhenEmailIsInvalid() {
+    void givenInvalidEmail_whenIssueToken_thenReturnBadRequest() {
         AuthTokenService authTokenService = Mockito.mock(AuthTokenService.class);
         AuthTokenController controller = new AuthTokenController(authTokenService);
         when(authTokenService.issueAccessToken("")).thenThrow(new IllegalArgumentException("email is required"));

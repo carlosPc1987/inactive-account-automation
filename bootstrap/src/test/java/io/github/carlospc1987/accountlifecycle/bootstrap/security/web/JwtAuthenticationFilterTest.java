@@ -37,7 +37,7 @@ class JwtAuthenticationFilterTest {
     }
 
     @Test
-    void shouldSkipAuthenticationWhenHeaderMissing() throws Exception {
+    void givenMissingAuthorizationHeader_whenFilterRuns_thenSkipAuthentication() throws Exception {
         JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtTokenService);
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
@@ -49,7 +49,7 @@ class JwtAuthenticationFilterTest {
     }
 
     @Test
-    void shouldSkipAuthenticationWhenHeaderIsNotBearer() throws Exception {
+    void givenNonBearerAuthorizationHeader_whenFilterRuns_thenSkipAuthentication() throws Exception {
         JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtTokenService);
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
@@ -62,7 +62,7 @@ class JwtAuthenticationFilterTest {
     }
 
     @Test
-    void shouldAuthenticateWhenBearerTokenIsValid() throws Exception {
+    void givenValidBearerToken_whenFilterRuns_thenSetAuthenticationContext() throws Exception {
         JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtTokenService);
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
@@ -86,7 +86,7 @@ class JwtAuthenticationFilterTest {
     }
 
     @Test
-    void shouldClearAuthenticationWhenTokenIsInvalid() throws Exception {
+    void givenInvalidBearerToken_whenFilterRuns_thenClearAuthenticationContext() throws Exception {
         JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtTokenService);
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();

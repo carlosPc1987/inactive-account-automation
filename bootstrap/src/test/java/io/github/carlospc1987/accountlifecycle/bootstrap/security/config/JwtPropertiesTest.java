@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class JwtPropertiesTest {
 
     @Test
-    void shouldUseSecureDefaults() {
+    void givenNewProperties_whenReadDefaults_thenUseSecureJwtDefaults() {
         JwtProperties properties = new JwtProperties();
 
         assertEquals("", properties.getSecret());
@@ -20,7 +20,7 @@ class JwtPropertiesTest {
     }
 
     @Test
-    void shouldAllowOverridingValues() {
+    void givenOverriddenValues_whenReadProperties_thenReturnOverriddenJwtProperties() {
         JwtProperties properties = new JwtProperties();
 
         properties.setSecret("env-secret");

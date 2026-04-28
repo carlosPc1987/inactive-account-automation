@@ -19,7 +19,7 @@ import static org.mockito.Mockito.mock;
 class DefaultAuthTokenServiceTest {
 
     @Test
-    void shouldIssueAccessTokenFromEmail() {
+    void givenValidEmail_whenIssueAccessToken_thenReturnBearerResponseWithExpectedClaims() {
         JwtTokenService jwtTokenService = mock(JwtTokenService.class);
         JwtProperties jwtProperties = new JwtProperties();
         jwtProperties.setExpirationMinutes(60);
@@ -45,7 +45,7 @@ class DefaultAuthTokenServiceTest {
     }
 
     @Test
-    void shouldFailWhenEmailIsBlank() {
+    void givenBlankEmail_whenIssueAccessToken_thenThrowIllegalArgumentException() {
         JwtTokenService jwtTokenService = mock(JwtTokenService.class);
         JwtProperties jwtProperties = new JwtProperties();
         DefaultAuthTokenService service = new DefaultAuthTokenService(jwtTokenService, jwtProperties);
@@ -54,7 +54,7 @@ class DefaultAuthTokenServiceTest {
     }
 
     @Test
-    void shouldFailWhenEmailIsNull() {
+    void givenNullEmail_whenIssueAccessToken_thenThrowIllegalArgumentException() {
         JwtTokenService jwtTokenService = mock(JwtTokenService.class);
         JwtProperties jwtProperties = new JwtProperties();
         DefaultAuthTokenService service = new DefaultAuthTokenService(jwtTokenService, jwtProperties);
@@ -63,7 +63,7 @@ class DefaultAuthTokenServiceTest {
     }
 
     @Test
-    void shouldNormalizeEmailBeforeGeneratingToken() {
+    void givenEmailWithSpacesAndUppercase_whenIssueAccessToken_thenNormalizeEmailBeforeIdGeneration() {
         JwtTokenService jwtTokenService = mock(JwtTokenService.class);
         JwtProperties jwtProperties = new JwtProperties();
         when(jwtTokenService.generateAccessToken(org.mockito.ArgumentMatchers.any(UUID.class), org.mockito.ArgumentMatchers.anyList()))
