@@ -52,15 +52,17 @@ class RuleEvaluatorTest {
     @Test
     void shouldFailWhenAccountIsNull() {
         RuleEvaluator evaluator = new RuleEvaluator(List.of(new NeverApplyRule()));
+        Instant evaluationTime = Instant.now();
 
-        assertThrows(NullPointerException.class, () -> evaluator.evaluate(null, Instant.now()));
+        assertThrows(NullPointerException.class, () -> evaluator.evaluate(null, evaluationTime));
     }
 
     @Test
     void shouldFailWhenEvaluationTimeIsNull() {
         RuleEvaluator evaluator = new RuleEvaluator(List.of(new NeverApplyRule()));
+        Account account = account();
 
-        assertThrows(NullPointerException.class, () -> evaluator.evaluate(account(), null));
+        assertThrows(NullPointerException.class, () -> evaluator.evaluate(account, null));
     }
 
     private Account account() {
