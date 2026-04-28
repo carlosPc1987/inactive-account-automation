@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class RuleEvaluatorTest {
 
     @Test
-    void shouldApplyMatchingRule() {
+    void givenMatchingRule_whenEvaluate_thenApplyRuleAndReturnAppliedCount() {
         Account account = account();
         Instant evaluationTime = Instant.parse("2026-04-01T00:00:00Z");
         MarkInactiveRule rule = new MarkInactiveRule();
@@ -27,7 +27,7 @@ class RuleEvaluatorTest {
     }
 
     @Test
-    void shouldNotApplyWhenRuleDoesNotMatch() {
+    void givenNonMatchingRule_whenEvaluate_thenSkipRuleAndReturnZero() {
         Account account = account();
         Instant evaluationTime = Instant.parse("2026-04-01T00:00:00Z");
         NeverApplyRule rule = new NeverApplyRule();
@@ -39,7 +39,7 @@ class RuleEvaluatorTest {
     }
 
     @Test
-    void shouldApplyMultipleRulesInOrder() {
+    void givenMultipleMatchingRules_whenEvaluate_thenApplyAllInOrder() {
         Account account = account();
         Instant evaluationTime = Instant.parse("2026-04-01T00:00:00Z");
         RuleEvaluator evaluator = new RuleEvaluator(List.of(new MarkInactiveRule(), new CounterRule()));
@@ -50,7 +50,7 @@ class RuleEvaluatorTest {
     }
 
     @Test
-    void shouldFailWhenAccountIsNull() {
+    void givenNullAccount_whenEvaluate_thenThrowNullPointerException() {
         RuleEvaluator evaluator = new RuleEvaluator(List.of(new NeverApplyRule()));
         Instant evaluationTime = Instant.now();
 
@@ -58,7 +58,7 @@ class RuleEvaluatorTest {
     }
 
     @Test
-    void shouldFailWhenEvaluationTimeIsNull() {
+    void givenNullEvaluationTime_whenEvaluate_thenThrowNullPointerException() {
         RuleEvaluator evaluator = new RuleEvaluator(List.of(new NeverApplyRule()));
         Account account = account();
 
