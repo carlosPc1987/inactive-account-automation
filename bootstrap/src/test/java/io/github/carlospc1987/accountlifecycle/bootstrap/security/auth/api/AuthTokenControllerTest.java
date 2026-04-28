@@ -28,10 +28,11 @@ class AuthTokenControllerTest {
         AuthTokenService authTokenService = Mockito.mock(AuthTokenService.class);
         AuthTokenController controller = new AuthTokenController(authTokenService);
         when(authTokenService.issueAccessToken("")).thenThrow(new IllegalArgumentException("email is required"));
+        AuthTokenRequest request = new AuthTokenRequest("");
 
         ResponseStatusException ex = assertThrows(
                 ResponseStatusException.class,
-                () -> controller.issueToken(new AuthTokenRequest(""))
+                () -> controller.issueToken(request)
         );
 
         assertEquals(400, ex.getStatusCode().value());
