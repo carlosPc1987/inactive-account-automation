@@ -37,7 +37,7 @@ class DefaultAccountServiceTest {
     }
 
     @Test
-    void shouldCreateAccount() {
+    void givenValidEmail_whenCreateAccount_thenPersistAndReturnActiveAccount() {
         when(accountRepository.save(any(Account.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         Account created = accountService.createAccount("user@example.com");
@@ -48,7 +48,7 @@ class DefaultAccountServiceTest {
     }
 
     @Test
-    void shouldGetAccountById() {
+    void givenExistingAccountId_whenGetAccountById_thenReturnAccount() {
         UUID id = UUID.randomUUID();
         Account account = new Account(
                 id,
@@ -65,7 +65,7 @@ class DefaultAccountServiceTest {
     }
 
     @Test
-    void shouldThrowWhenAccountNotFoundById() {
+    void givenMissingAccountId_whenGetAccountById_thenThrowNoSuchElementException() {
         UUID id = UUID.randomUUID();
         when(accountRepository.findById(id)).thenReturn(Optional.empty());
 
@@ -73,7 +73,7 @@ class DefaultAccountServiceTest {
     }
 
     @Test
-    void shouldReturnAllAccounts() {
+    void givenExistingAccounts_whenGetAllAccounts_thenReturnAllAccounts() {
         List<Account> accounts = List.of(
                 new Account(UUID.randomUUID(), "a@example.com", Instant.now(), Instant.now(), false),
                 new Account(UUID.randomUUID(), "b@example.com", Instant.now(), Instant.now(), true)
@@ -87,7 +87,7 @@ class DefaultAccountServiceTest {
     }
 
     @Test
-    void shouldUpdateAccountEmail() {
+    void givenExistingAccount_whenUpdateAccountEmail_thenPersistUpdatedAccount() {
         UUID id = UUID.randomUUID();
         Account existing = new Account(
                 id,
@@ -109,7 +109,7 @@ class DefaultAccountServiceTest {
     }
 
     @Test
-    void shouldDeleteAccountById() {
+    void givenExistingAccountId_whenDeleteAccount_thenDeleteFromRepository() {
         UUID id = UUID.randomUUID();
         Account existing = new Account(
                 id,
@@ -128,7 +128,7 @@ class DefaultAccountServiceTest {
     }
 
     @Test
-    void shouldNotDeleteWhenAccountDoesNotExist() {
+    void givenMissingAccountId_whenDeleteAccount_thenThrowAndSkipRepositoryDelete() {
         UUID id = UUID.randomUUID();
         when(accountRepository.findById(id)).thenReturn(Optional.empty());
 
