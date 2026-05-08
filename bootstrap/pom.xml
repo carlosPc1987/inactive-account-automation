@@ -18,6 +18,12 @@
             <artifactId>application-account</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.carlospc1987.accountlifecycle</groupId>
+            <artifactId>infrastructure-account</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
