@@ -12,6 +12,18 @@
 
     <artifactId>infrastructure-account</artifactId>
 
+    <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.sql</include>
+                </includes>
+            </testResource>
+        </testResources>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>io.github.carlospc1987.accountlifecycle</groupId>
