@@ -20,7 +20,12 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(classes = JpaRepositoryAdaptersIntegrationTest.TestJpaConfiguration.class)
+@SpringBootTest(
+        classes = JpaRepositoryAdaptersIntegrationTest.TestJpaConfiguration.class,
+        properties = {
+                "spring.flyway.locations=filesystem:src/test/resources/db/migration"
+        }
+)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import({
         JpaAccountRepositoryAdapter.class,
