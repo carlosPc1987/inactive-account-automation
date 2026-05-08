@@ -14,19 +14,19 @@ public class JpaAccountAuditEventEntity {
 
     @Id
     @Column(name = "id", nullable = false, updatable = false)
-    private UUID id;
+    UUID id;
 
     @Column(name = "account_id", nullable = false)
-    private UUID accountId;
+    UUID accountId;
 
     @Column(name = "event_type", nullable = false)
-    private String eventType;
+    String eventType;
 
     @Column(name = "description", nullable = false)
-    private String description;
+    String description;
 
     @Column(name = "occurred_at", nullable = false, updatable = false)
-    private Instant occurredAt;
+    Instant occurredAt;
 
     protected JpaAccountAuditEventEntity() {
         // JPA only
@@ -38,25 +38,5 @@ public class JpaAccountAuditEventEntity {
         this.eventType = eventType;
         this.description = description;
         this.occurredAt = occurredAt;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public UUID getAccountId() {
-        return accountId;
-    }
-
-    public String getEventType() {
-        return eventType;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Instant getOccurredAt() {
-        return occurredAt;
     }
 }

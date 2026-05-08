@@ -52,11 +52,11 @@ public class JpaAccountRepositoryAdapter implements AccountRepository {
 
     private Account toDomain(JpaAccountEntity entity) {
         return new Account(
-                entity.getId(),
-                entity.getEmail(),
-                entity.getCreatedAt(),
-                entity.getLastActivityAt(),
-                entity.isInactive()
+                entity.id,
+                entity.email,
+                entity.createdAt,
+                entity.lastActivityAt,
+                entity.inactive
         );
     }
 }

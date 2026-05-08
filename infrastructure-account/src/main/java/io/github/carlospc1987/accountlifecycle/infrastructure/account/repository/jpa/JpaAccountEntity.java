@@ -14,19 +14,19 @@ public class JpaAccountEntity {
 
     @Id
     @Column(name = "id", nullable = false, updatable = false)
-    private UUID id;
+    UUID id;
 
     @Column(name = "email", nullable = false)
-    private String email;
+    String email;
 
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Instant createdAt;
+    Instant createdAt;
 
     @Column(name = "last_activity_at", nullable = false)
-    private Instant lastActivityAt;
+    Instant lastActivityAt;
 
     @Column(name = "inactive", nullable = false)
-    private boolean inactive;
+    boolean inactive;
 
     protected JpaAccountEntity() {
         // JPA only
@@ -38,25 +38,5 @@ public class JpaAccountEntity {
         this.createdAt = createdAt;
         this.lastActivityAt = lastActivityAt;
         this.inactive = inactive;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public Instant getLastActivityAt() {
-        return lastActivityAt;
-    }
-
-    public boolean isInactive() {
-        return inactive;
     }
 }

@@ -47,11 +47,11 @@ public class JpaAccountAuditEventRepositoryAdapter implements AccountAuditEventR
 
     private AccountAuditEvent toDomain(JpaAccountAuditEventEntity entity) {
         return new AccountAuditEvent(
-                entity.getId(),
-                entity.getAccountId(),
-                entity.getEventType(),
-                entity.getDescription(),
-                entity.getOccurredAt()
+                entity.id,
+                entity.accountId,
+                entity.eventType,
+                entity.description,
+                entity.occurredAt
         );
     }
 }
