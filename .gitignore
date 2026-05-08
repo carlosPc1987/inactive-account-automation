@@ -48,3 +48,7 @@ application-local.properties
 *.backup
 *.sqlite
 *.db
+
+# Keep Flyway migrations versioned
+!**/src/main/resources/db/migration/*.sql
+!**/src/test/resources/db/migration/*.sql
